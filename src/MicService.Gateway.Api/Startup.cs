@@ -27,35 +27,35 @@ namespace MicService.Gateway.Api
         public void ConfigureServices(IServiceCollection services)
         {
             #region MyRegion
-            //services.AddSwaggerGen(options =>
-            //{
-            //    options.SwaggerDoc(Configuration["Swagger:Name"],
-            //        new OpenApiInfo
-            //        {
-            //            Title = Configuration["Swagger:Title"],
-            //            Version = Configuration["Swagger:Version"]
-            //        });
-            //}); 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc(Configuration["Swagger:Name"],
+                    new OpenApiInfo
+                    {
+                        Title = Configuration["Swagger:Title"],
+                        Version = Configuration["Swagger:Version"]
+                    });
+            });
             #endregion
 
-            //var config = new ConfigurationBuilder().AddJsonFile("Ocelot.json").Build();
+            var config = new ConfigurationBuilder().AddJsonFile("Ocelot.json").Build();
             services.AddControllers();
-            services.AddOcelot();
+            services.AddOcelot(config);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             #region MyRegion
-            //var apis = Configuration["Apis:SwaggerNames"].Split(";").ToList();
-            //app.UseSwagger()
-            //     .UseSwaggerUI(options =>
-            //     {
-            //         apis.ToList().ForEach(key =>
-            //         {
-            //             options.SwaggerEndpoint($"/{key}/swagger.json", key);
-            //         });
-            //         options.DocumentTitle = "apiÍø¹Ø";
-            //     }); 
+            var apis = Configuration["Apis:SwaggerNames"].Split(";").ToList();
+            app.UseSwagger()
+                 .UseSwaggerUI(options =>
+                 {
+                     apis.ToList().ForEach(key =>
+                     {
+                         options.SwaggerEndpoint($"/{key}/swagger.json", key);
+                     });
+                     options.DocumentTitle = "apiÍø¹Ø";
+                 });
             #endregion
 
             if (env.IsDevelopment())

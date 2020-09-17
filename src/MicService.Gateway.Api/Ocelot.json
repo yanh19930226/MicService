@@ -10,12 +10,24 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/api/user/getuser",
+      "UpstreamPathTemplate": "/user/getuser",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    //swagger
+    {
+      "UpstreamPathTemplate": "/UserApi/swagger.json",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/UserApi/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {
-    //"ReRouteIsCaseSensitive": false,
     "RequestIdKey": "OcRequestId",
     "BaseUrl": "http://localhost:5000"
   }

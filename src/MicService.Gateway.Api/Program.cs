@@ -21,15 +21,15 @@ namespace MicService.Gateway.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureAppConfiguration((hostingContext, builder) =>
-                {
-                    var env = hostingContext.HostingEnvironment;
-                    //根据环境变量加载不同的json配置
-                    builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile("Ocelot.json")
-                    .AddEnvironmentVariables();//从环境变量添加配置
                 });
+                //.ConfigureAppConfiguration((hostingContext, builder) =>
+                //{
+                //    var env = hostingContext.HostingEnvironment;
+                //    //根据环境变量加载不同的json配置
+                //    builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                //    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                //    .AddJsonFile("Ocelot.json")
+                //    .AddEnvironmentVariables();//从环境变量添加配置
+                //});
     }
 }
