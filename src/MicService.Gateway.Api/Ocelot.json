@@ -1,0 +1,21 @@
+{
+  "ReRoutes": [
+    //userapi
+    {
+      "DownstreamPathTemplate": "/api/user/getuser",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/user/getuser",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    //"ReRouteIsCaseSensitive": false,
+    "BaseUrl": "http://localhost:5000"
+  }
+}

@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MicService.User.Api</name>
+    </assembly>
+    <members>
+        <member name="T:MicService.User.Api.Controllers.UserController">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.#ctor(MicService.User.Api.UserContext)">
+            <summary>
+            用户服务
+            </summary>
+            <param name="userContext"></param>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.Test">
+            <summary>
+            全局异常测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.Get">
+            <summary>
+            获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.GetUserInfo(System.Int32)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.Patch(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{MicService.User.Api.Models.Domain.User})">
+            <summary>
+            更新用户信息
+            </summary>
+            <param name="patch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.CheckOrCreate(System.String)">
+            <summary>
+            检查或则创建用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.ServicesDiscovery(System.String)">
+            <summary>
+            服务发现
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.WebHostMigrationsExtension.MigrateDbContext``1(Microsoft.Extensions.Hosting.IHost,System.Action{``0,System.IServiceProvider})">
+            <summary>
+            初始化database方法
+            </summary>
+            <typeparam name="TContext"></typeparam>
+            <param name="host"></param>
+            <param name="sedder"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.BPFile.Id">
+            <summary>
+            BPid
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.BPFile.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.BPFile.FileName">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.BPFile.OriginalPath">
+            <summary>
+            原始地址
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.BPFile.FormatPath">
+            <summary>
+            转化地址
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.BPFile.CreateTme">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Name">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Title">
+            <summary>
+            职位
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Phone">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Tel">
+            <summary>
+            公司电话
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.ProvinceId">
+            <summary>
+            省id
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Province">
+            <summary>
+            省
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.CityId">
+            <summary>
+            市id
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.City">
+            <summary>
+            市
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.NameCard">
+            <summary>
+            名片地址
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.User.Properties">
+            <summary>
+            用户属性列表
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.UserProperty.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.UserProperty.Key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.UserProperty.Text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.UserProperty.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.UserTag.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.User.Api.Models.Domain.UserTag.Tag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+    </members>
+</doc>
