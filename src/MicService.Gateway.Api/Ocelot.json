@@ -1,5 +1,5 @@
 {
-  "ReRoutes": [
+  "Routes": [
     //userapi
     {
       "DownstreamPathTemplate": "/api/user/getuser",
@@ -16,6 +16,7 @@
   ],
   "GlobalConfiguration": {
     //"ReRouteIsCaseSensitive": false,
+    "RequestIdKey": "OcRequestId",
     "BaseUrl": "http://localhost:5000"
   }
 }

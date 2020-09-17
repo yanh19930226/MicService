@@ -39,8 +39,8 @@ namespace MicService.Gateway.Api
             #endregion
 
             //var config = new ConfigurationBuilder().AddJsonFile("Ocelot.json").Build();
-            services.AddOcelot();
             services.AddControllers();
+            services.AddOcelot();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -58,8 +58,6 @@ namespace MicService.Gateway.Api
             //     }); 
             #endregion
 
-            app.UseOcelot().Wait();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -70,6 +68,8 @@ namespace MicService.Gateway.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseOcelot();
         }
     }
 }
