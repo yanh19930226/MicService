@@ -4,15 +4,27 @@
     {
       "DownstreamPathTemplate": "/api/user/getuser",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5002
-        }
-      ],
+      "ServiceName": "UserApi",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UseServiceDiscovery": true,
       "UpstreamPathTemplate": "/user/getuser",
       "UpstreamHttpMethod": [ "Get" ]
     },
+    //服务发现测试
+    {
+      "DownstreamPathTemplate": "/api/user/servicesdiscovery",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/user/servicesdiscovery",
+      "UpstreamHttpMethod": [ "Get" ],
+      "ServiceName": "UserApi",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UseServiceDiscovery": true
+    },
+
     //swagger
     {
       "UpstreamPathTemplate": "/UserApi/swagger.json",
@@ -29,6 +41,11 @@
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
-    "BaseUrl": "http://localhost:5000"
+    "BaseUrl": "http://localhost:5000",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   }
 }

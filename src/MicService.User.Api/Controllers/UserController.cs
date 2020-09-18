@@ -137,8 +137,8 @@ namespace MicService.User.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("servicesdiscovery")]
-        [HttpPost]
-        public async Task<IActionResult>ServicesDiscovery([FromForm] string phone)
+        [HttpGet]
+        public async Task<IActionResult>ServicesDiscovery()
         {
             var features = ServiceLocator.ApplicationBuilder.Properties["server.Features"] as FeatureCollection;
             var address = features.Get<IServerAddressesFeature>().Addresses.First();

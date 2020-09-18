@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 
 namespace MicService.Gateway.Api
 {
@@ -40,7 +41,7 @@ namespace MicService.Gateway.Api
 
             var config = new ConfigurationBuilder().AddJsonFile("Ocelot.json").Build();
             services.AddControllers();
-            services.AddOcelot(config);
+            services.AddOcelot(config).AddConsul() ;
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
