@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MicService.User.Api.Models.Domain;
 
 namespace MicService.User.Api.Controllers
 {
@@ -132,6 +133,48 @@ namespace MicService.User.Api.Controllers
                 //user.Title
             });
         }
+
+        /// <summary>
+        /// 获取用户的标签
+        /// </summary>
+        /// <returns></returns>
+        [Route("tags")]
+        [HttpGet]
+        public async Task<IActionResult> GetUserTags()
+        {
+            return Ok(await _userContext.UserTags.Where(u => u.UserId == 1).ToListAsync());
+        }
+        /// <summary>
+        /// 根据手机号码查询用户
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        [Route("search")]
+        [HttpPost]
+        public async Task<IActionResult> Search(string phone)
+        {
+            return Ok(await _userContext.Users.Include(u => u.Properties).SingleOrDefaultAsync(q => q.Phone == phone));
+        }
+        /// <summary>
+        /// 更新用户标签
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        [Route("tags")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserTags([FromBody] List<string> tags)
+        {
+            var originTags = _userContext.UserTags.Where(q => q.UserId == 1);
+            var newTags = tags.Except(originTags.Select(t => t.Tag));
+            await _userContext.UserTags.AddRangeAsync(newTags.Select(t => new UserTag
+            {
+                Tag = t,
+                UserId = 1
+            }));
+            await _userContext.SaveChangesAsync();
+            return Ok();
+        }
+
         /// <summary>
         /// 服务发现
         /// </summary>

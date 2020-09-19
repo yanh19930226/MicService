@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MicService.Contact.Api</name>
+    </assembly>
+    <members>
+        <member name="M:MicService.Contact.Api.Controllers.ContactController.GetApplyRequestList(System.Threading.CancellationToken)">
+            <summary>
+            获取当前用户好友申请列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Contact.Api.Controllers.ContactController.AddApplyRequest(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            请求添加别人为好友(申请人自己)
+            </summary>
+            <param name="userId">被申请用户Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Contact.Api.Data.ContactContext.ChekAndCreateCollection(System.String)">
+            <summary>
+            判断Mongo是否存在Collection不存在就创建
+            </summary>
+            <param name="collectionname"></param>
+        </member>
+        <member name="P:MicService.Contact.Api.Data.ContactContext.ContactBooks">
+            <summary>
+            用户通讯录
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Data.ContactContext.ContactApplyRequests">
+            <summary>
+            好友申请请求记录
+            </summary>
+        </member>
+        <member name="M:MicService.Contact.Api.Data.IContactApplyRequestRepository.GetRequestListAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取用户所有申请列表
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Contact.Api.Data.IContactApplyRequestRepository.AddRequestAsync(MicService.Contact.Api.Models.ContactApplyRequest,System.Threading.CancellationToken)">
+            <summary>
+            申请好友请求
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Contact.Api.Data.IContactApplyRequestRepository.ApprovalAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+             <summary>
+            通过好友申请
+             </summary>
+             <param name="appliedId">申请用户id</param>
+             <returns></returns>
+        </member>
+        <member name="M:MicService.Contact.Api.Data.IContactRepository.GetContactAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取联系人列表
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Contact.Api.Data.IContactRepository.TagContactAsync(System.Int32,System.Int32,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+            <summary>
+            更新好友标签
+            </summary>
+            <param name="tags"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.Contact.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.Contact.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.Contact.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.Contact.Title">
+            <summary>
+            工作岗位
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.Contact.Avatar" -->
+        <member name="P:MicService.Contact.Api.Models.Contact.Tags">
+            <summary>
+            用户标签
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.ContactApplyRequest.AppliedId" -->
+        <member name="P:MicService.Contact.Api.Models.ContactApplyRequest.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.ContactApplyRequest.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.ContactApplyRequest.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.ContactApplyRequest.Title">
+            <summary>
+            工作岗位
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.ContactApplyRequest.Avatar" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.ContactApplyRequest.Approvaled" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.ContactApplyRequest.HandleTime" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.ContactApplyRequest.CreateTime" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Contact.Api.Models.ContactApplyRequest.ApplyTime" -->
+        <member name="P:MicService.Contact.Api.Models.ContactBook.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.Contact.Api.Models.ContactBook.Contacts">
+            <summary>
+            联系人列表
+            </summary>
+        </member>
+        <member name="M:MicService.Contact.Api.Services.IUserService.GetBaseUserInfoAsync(System.Int32)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

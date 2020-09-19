@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MicService.Project.Api</name>
+    </assembly>
+    <members>
+        <member name="T:MicService.Project.Api.Controllers.TestController">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Project.Api.Controllers.TestController.Test">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
