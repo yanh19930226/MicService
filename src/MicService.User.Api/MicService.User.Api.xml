@@ -47,7 +47,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MicService.User.Api.Controllers.UserController.ServicesDiscovery(System.String)">
+        <member name="M:MicService.User.Api.Controllers.UserController.ServicesDiscovery">
             <summary>
             服务发现
             </summary>
