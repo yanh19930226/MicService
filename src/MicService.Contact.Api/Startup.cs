@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using Core.Consul;
 using Core.Logger;
 using Core.Swagger;
 using Microsoft.AspNetCore.Builder;
@@ -23,12 +24,14 @@ namespace MicService.Contact.Api
         public override void CommonServices(IServiceCollection services)
         {
             services.AddCoreSwagger()
+                 //.AddConsul()
                .AddCoreSeriLog();
         }
 
         public override void CommonConfigure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
+            app/*.UseConsul();*/
+                .UseCoreSwagger();
         }
     }
 }

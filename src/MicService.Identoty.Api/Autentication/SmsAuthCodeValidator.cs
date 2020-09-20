@@ -37,20 +37,19 @@ namespace MicService.Identoty.Api.Autentication
                 return;
             }
             var userindentity = await _userService.CheckOrCreate(phone);
-            if (userindentity <=0)
+            if (userindentity !=null)
             {
                 context.Result = ErrorResult;
                 return;
             }
 
-            //var claims = new Claim[] {
-            //    new Claim("name",userindentity.Name??string.Empty),
-            //    new Claim("avatar",userindentity.Avatar??string.Empty),
-            //    new Claim("title",userindentity.Title??string.Empty),
-            //    new Claim("company",userindentity.Company??string.Empty),
-            //};
-
-            context.Result = new GrantValidationResult(userindentity.ToString(), GrantType);
+            var claims = new Claim[] {
+                new Claim("name",userindentity.Name??string.Empty),
+                new Claim("avatar",userindentity.Avatar??string.Empty),
+                new Claim("title",userindentity.Title??string.Empty),
+                new Claim("company",userindentity.Company??string.Empty),
+            };
+            context.Result = new GrantValidationResult(userindentity.UserId.ToString(), GrantType, claims);
         }
     }
 }

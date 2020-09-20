@@ -3,6 +3,7 @@ using Core.ServiceDiscovery.Impletment.LoadBalancer;
 using Core.ServiceDiscovery.Impletment.Provider;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MicService.Abstractions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace MicService.Identoty.Api.Services.Impletment
             _httpClient = httpClient;
             _logger = logger;
         }
-        public async Task<int> CheckOrCreate(string phone)
+        public async Task<UserIdentity> CheckOrCreate(string phone)
         {
 
             #region ServicesDiscovery
@@ -42,9 +43,8 @@ namespace MicService.Identoty.Api.Services.Impletment
                 var response = await _httpClient.PostAsync(_userServiceUrl.ToString(), new  FormUrlEncodedContent (form));
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    var userId = await response.Content.ReadAsStringAsync();
-                    int.TryParse(userId, out int result);
-                    return result;
+                    var result = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<UserIdentity>(result);
                 }
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace MicService.Identoty.Api.Services.Impletment
                 _logger.LogError("在重试之后失败");
                 throw new Exception(ex.Message);
             }
-            return 0;
+            return null;
         }
     }
 }

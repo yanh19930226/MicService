@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\MicService.Abstractions\MicService.Abstractions.csproj" />
   </ItemGroup>
 
 

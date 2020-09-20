@@ -1,11 +1,18 @@
-﻿using System;
+﻿using MicService.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MicService.Contact.Api.Services
 {
-    interface IUserService
+    public interface IUserService
     {
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<UserInfo> GetBaseUserInfoAsync(int userId);
     }
 }

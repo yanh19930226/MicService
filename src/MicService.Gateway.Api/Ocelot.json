@@ -24,7 +24,51 @@
       },
       "UseServiceDiscovery": true
     },
-
+    //contactapi
+    {
+      "DownstreamPathTemplate": "/api/contact/getcontact",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/contact/getcontact",
+      "UpstreamHttpMethod": [ "Get" ],
+      "ServiceName": "ContactApi",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UseServiceDiscovery": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/contact/tag",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/contact/tag",
+      "UpstreamHttpMethod": [ "Put" ],
+      "ServiceName": "ContactApi",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UseServiceDiscovery": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/contact/applyrequest/{catchAll}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/contact/applyrequest/{catchAll}",
+      "UpstreamHttpMethod": [ "Get","Put", "Post" ],
+      "ServiceName": "ContactApi",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "UseServiceDiscovery": true
+    },
+    //{
+    //  "DownstreamPathTemplate": "/api/contact/applyrequest",
+    //  "DownstreamScheme": "http",
+    //  "UpstreamPathTemplate": "/contact/applyrequest",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "ServiceName": "ContactApi",
+    //  "LoadBalancerOptions": {
+    //    "Type": "RoundRobin"
+    //  },
+    //  "UseServiceDiscovery": true
+    //},
     //swagger
     {
       "UpstreamPathTemplate": "/UserApi/swagger.json",

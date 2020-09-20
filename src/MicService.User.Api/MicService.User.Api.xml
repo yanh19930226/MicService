@@ -47,6 +47,26 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.GetUserTags">
+            <summary>
+            获取用户的标签
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.Search(System.String)">
+            <summary>
+            根据手机号码查询用户
+            </summary>
+            <param name="phone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.UpdateUserTags(System.Collections.Generic.List{System.String})">
+            <summary>
+            更新用户标签
+            </summary>
+            <param name="tags"></param>
+            <returns></returns>
+        </member>
         <member name="M:MicService.User.Api.Controllers.UserController.ServicesDiscovery">
             <summary>
             服务发现

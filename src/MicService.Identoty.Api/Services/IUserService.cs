@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicService.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,6 @@ namespace MicService.Identoty.Api.Services
         /// 检查手机号是否存在不存在就创建
         /// </summary>
         /// <param name=""></param>
-        Task<int> CheckOrCreate(string phone);
+        Task<UserIdentity> CheckOrCreate(string phone);
     }
 }

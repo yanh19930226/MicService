@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Core;
 using Core.Logger;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,10 @@ namespace MicService.Identoty.Api
                          .AddSingleton(new HttpClient())
                          .AddScoped<IAuthCodeService, TestAuthCodeService>()
                          .AddScoped<IUserService, UserService>();
+
+            #region ProfileService
+            services.AddTransient<IProfileService, ProfileService>();
+            #endregion
         }
 
         public override void CommonConfigure(IApplicationBuilder app, IWebHostEnvironment env)
