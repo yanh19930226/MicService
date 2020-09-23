@@ -32,23 +32,18 @@ namespace Core
             {
                 options.Filters.Add(typeof(GloabalExceptionFilter)); 
             });
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             this.CommonServices(services);
 
         }
         public abstract void CommonServices(IServiceCollection services);
         #endregion
 
-        #region 第三方容器Autofac
-        //public void ConfigureContainer(ContainerBuilder builder)
-        //{
-        //    this.SuppertContainer(container);
-        //}
-
-        //public abstract ContainerBuilder SuppertContainer(ContainerBuilder container);
+        #region Autofac
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AutofacModule());
+        } 
         #endregion
-
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
