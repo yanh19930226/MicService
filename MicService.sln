@@ -25,9 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pro", "pro", "{C343BC49-84E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Project.Api", "src\pro\MicService.Project.Api\MicService.Project.Api.csproj", "{C678AA4F-9B8C-4E17-BE51-37F8A5D2200D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicService.Project.Api.Domain", "src\pro\MicService.Project.Api.Domain\MicService.Project.Api.Domain.csproj", "{35627FA4-01C2-4686-A2F8-BF820EC385C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Project.Api.Domain", "src\pro\MicService.Project.Api.Domain\MicService.Project.Api.Domain.csproj", "{35627FA4-01C2-4686-A2F8-BF820EC385C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicService.Project.Api.Infrastructure", "src\pro\MicService.Project.Api.Infrastructure\MicService.Project.Api.Infrastructure.csproj", "{5D57B7ED-43B5-4EE0-ADE2-2593F8E91CDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Project.Api.Infrastructure", "src\pro\MicService.Project.Api.Infrastructure\MicService.Project.Api.Infrastructure.csproj", "{5D57B7ED-43B5-4EE0-ADE2-2593F8E91CDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
