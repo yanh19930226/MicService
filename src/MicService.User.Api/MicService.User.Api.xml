@@ -4,12 +4,29 @@
         <name>MicService.User.Api</name>
     </assembly>
     <members>
+        <member name="T:MicService.User.Api.Controllers.EventController">
+            <summary>
+            事件服务
+            </summary>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.EventController.Index">
+            <summary>
+            集成事件发送
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.EventController.Cap">
+            <summary>
+            CAP事件发送
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:MicService.User.Api.Controllers.UserController">
             <summary>
             用户服务
             </summary>
         </member>
-        <member name="M:MicService.User.Api.Controllers.UserController.#ctor(MicService.User.Api.UserContext)">
+        <member name="M:MicService.User.Api.Controllers.UserController.#ctor(MicService.User.Api.UserContext,AutoMapper.IMapper)">
             <summary>
             用户服务
             </summary>
@@ -70,6 +87,12 @@
         <member name="M:MicService.User.Api.Controllers.UserController.ServicesDiscovery">
             <summary>
             服务发现
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.User.Api.Controllers.UserController.Map">
+            <summary>
+            映射测试
             </summary>
             <returns></returns>
         </member>

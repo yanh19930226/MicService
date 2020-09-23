@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Consul;
+using Core.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,29 +32,22 @@ namespace Core
             {
                 options.Filters.Add(typeof(GloabalExceptionFilter)); 
             });
-
-            var container = new ContainerBuilder();
-
-
-            #region Mapper
-            List<Profile> autoMapperProfiles = (Assembly.GetEntryAssembly()!.GetTypes()).Where(p => p.BaseType == typeof(Profile))
-              .Select(p => (Profile)Activator.CreateInstance(p)).ToList();
-            container.Register(ctx => new MapperConfiguration(cfg =>
-            {
-                foreach (Profile item in autoMapperProfiles)
-                {
-                    cfg.AddProfile(item);
-                }
-            }));
-            container.Register(ctx => ctx.Resolve<MapperConfiguration>().CreateMapper()).As<IMapper>().InstancePerLifetimeScope(); 
-            #endregion
-
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             this.CommonServices(services);
-            //return new AutofacServiceProvider(container.Build());
 
         }
         public abstract void CommonServices(IServiceCollection services);
         #endregion
+
+        #region 第三方容器Autofac
+        //public void ConfigureContainer(ContainerBuilder builder)
+        //{
+        //    this.SuppertContainer(container);
+        //}
+
+        //public abstract ContainerBuilder SuppertContainer(ContainerBuilder container);
+        #endregion
+
 
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,6 +56,7 @@ namespace Core
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStateAutoMapper();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

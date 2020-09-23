@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\Project\MicService\src\MicService.User.Api\MicService.User.Api.xml</DocumentationFile>
+    <DocumentationFile>D:\Work\MicServicebeta\MicServicebeta\src\MicService.User.Api\MicService.User.Api.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
@@ -20,13 +20,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\MicService.Abstractions\MicService.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Profile\" />
-  </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://batect.dev/configSchema.json" /></VisualStudio></ProjectExtensions>
 
 
 </Project>

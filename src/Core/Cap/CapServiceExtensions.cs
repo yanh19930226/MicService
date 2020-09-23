@@ -9,27 +9,23 @@ namespace Core.Cap
 {
     public static class CapServiceExtensions
     {
-        public static IServiceCollection AddCap(this IServiceCollection services, DbContext context,IConfiguration configuration = null)
+        public static IServiceCollection AddCap(this IServiceCollection services,IConfiguration configuration = null)
         {
             configuration = (configuration ?? services.BuildServiceProvider().GetService<IConfiguration>());
             CapOptions capOptions = configuration.GetSection("Cap").Get<CapOptions>();
-            //services.AddCap(options =>
-            //{
-            //    options.UseEntityFramework<context>()
-            //    .UseMySql(capOptions.CurrentNodeHostName)
-            //    .UseRabbitMQ("localhost")
-            //    .UseDashboard();
+            services.AddCap(x =>
+            {
+                x.UseMySql(configuration.GetSection("ConnectionStrings:MysqlUser").Value);
+                x.UseRabbitMQ(configuration["EventBus:EventBusConnection"]);
+                x.UseDashboard();
+                x.FailedRetryCount = 5;
+                x.FailedThresholdCallback = (type) =>
+                {
+                    Console.WriteLine(
+                        $@"A message of type {type} failed after executing {x.FailedRetryCount} several times, requiring manual troubleshooting. Message name: {type.Message.Value.ToString()}");
+                };
+            });
 
-            //    options.UseDiscovery(opt =>
-            //    {
-            //        opt.DiscoveryServerHostName = capOptions.CurrentNodeHostName;
-            //        opt.DiscoveryServerPort = capOptions.CurrentNodeHostName;
-            //        opt.CurrentNodeHostName = capOptions.CurrentNodeHostName;
-            //        opt.CurrentNodePort = 5800;
-            //        opt.NodeId = capOptions.CurrentNodeHostName;
-            //        opt.NodeName = capOptions.CurrentNodeHostName;
-            //    });
-            //});
             return services;
         }
     }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Core;
+using Core.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MicService.Abstractions.Dtos;
 using MicService.User.Api.Models.Domain;
 
 namespace MicService.User.Api.Controllers
@@ -21,14 +24,16 @@ namespace MicService.User.Api.Controllers
     public class UserController : Controller
     {
         private UserContext _userContext;
+        private readonly IMapper _mapper;
         //private ILogger _logger;
         /// <summary>
         /// 用户服务
         /// </summary>
         /// <param name="userContext"></param>
-        public UserController(UserContext userContext)
+        public UserController(UserContext userContext, IMapper mapper)
         {
             _userContext = userContext;
+            _mapper = mapper;
         }
         /// <summary>
         /// 全局异常测试
@@ -57,7 +62,6 @@ namespace MicService.User.Api.Controllers
             if (user == null)
                 throw new CoreException($"错误的用户上下文id");
             return Json(user);
-
         }
         /// <summary>
         /// 获取用户信息
@@ -133,7 +137,6 @@ namespace MicService.User.Api.Controllers
                 user.Title
             });
         }
-
         /// <summary>
         /// 获取用户的标签
         /// </summary>
@@ -174,7 +177,6 @@ namespace MicService.User.Api.Controllers
             await _userContext.SaveChangesAsync();
             return Ok();
         }
-
         /// <summary>
         /// 服务发现
         /// </summary>
@@ -186,6 +188,23 @@ namespace MicService.User.Api.Controllers
             var features = ServiceLocator.ApplicationBuilder.Properties["server.Features"] as FeatureCollection;
             var address = features.Get<IServerAddressesFeature>().Addresses.First();
             return Ok($"Info From ServiceA[{address}]");
+        }
+        /// <summary>
+        /// 映射测试
+        /// </summary>
+        /// <returns></returns>
+        [Route("map")]
+        [HttpGet]
+        public async Task<IActionResult> Map()
+        {
+            var user = await _userContext.Users
+                 .AsNoTracking()
+                 .SingleOrDefaultAsync(u => u.Id == 1);
+            if (user == null)
+                throw new CoreException($"错误的用户上下文id");
+            var res = _mapper.Map<UserDto>(user);
+            UserDto dto = user.MapTo<UserDto>();
+            return Json(res);
         }
     }
 }
