@@ -24,7 +24,7 @@ namespace MicService.Contact.Api.Data
         /// <param name="user"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> UpdateContactInfo(UserProfileChangedEvent user, CancellationToken cancellationToken);
+        Task<bool> UpdateContactInfo(UserProfileChangedIntegrationEvent user, CancellationToken cancellationToken);
         /// <summary>
         /// 获取联系人列表
         /// </summary>

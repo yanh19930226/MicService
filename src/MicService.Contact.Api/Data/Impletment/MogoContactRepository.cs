@@ -59,7 +59,7 @@ namespace MicService.Contact.Api.Data.Impletment
             return updateRes.MatchedCount == updateRes.ModifiedCount && updateRes.ModifiedCount == 1;
         }
 
-        public async Task<bool> UpdateContactInfo(UserProfileChangedEvent user, CancellationToken cancellationToken)
+        public async Task<bool> UpdateContactInfo(UserProfileChangedIntegrationEvent user, CancellationToken cancellationToken)
         {
             var contactbook = (await _contactContext.ContactBooks.FindAsync(q => q.UserId == user.UserId, null, cancellationToken)).FirstOrDefault(cancellationToken);
             if (contactbook == null)

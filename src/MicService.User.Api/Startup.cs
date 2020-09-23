@@ -21,6 +21,12 @@ using Consul;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Options;
+using Core.EventBus.Impletment.RabbitMq;
+using MicService.User.Api.Integration.Event;
+using MicService.User.Api.Integration.Handler;
+using Autofac;
+using AutoMapper;
+using Core.Cap;
 
 namespace MicService.User.Api
 {
@@ -38,13 +44,21 @@ namespace MicService.User.Api
             })
                .AddCoreSwagger()
                .AddConsul()
+               .AddEventBus()
+               .AddCap()
                .AddCoreSeriLog();
+
+            services.AddScoped<UserProfileChangedIntegrationEventHandler>();
         }
 
         public override void CommonConfigure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             ServiceLocator.ApplicationBuilder = app;
             app.UseCoreSwagger()
+                  .UseEventBus(eventBus =>
+                  {
+                      eventBus.Subscribe<TestIntegrationEvent, TestIntegrationEventHandler>();
+                  })
                   .UseConsul();
         }
     }
