@@ -37,7 +37,7 @@ namespace MicService.Project.Api
 
             services.AddDbContext<ProjectContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString(""), b => b.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+                options.UseMySql(Configuration.GetConnectionString("MysqlUser"), b => b.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
             });
             #endregion
 

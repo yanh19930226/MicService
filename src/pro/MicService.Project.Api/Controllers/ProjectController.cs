@@ -64,9 +64,9 @@ namespace MicService.Project.Api.Controllers
             var command = new ViewProjectCommand()
             {
                 ProjectId = projectId,
-                UserId = UserIdentity.UserId,
-                UserName = UserIdentity.Name,
-                Avatar = UserIdentity.Avatar
+                UserId = 1,
+                UserName = "test",
+                Avatar = "test"
             };
             await _mediator.Send(command);
             return Ok();

@@ -84,7 +84,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:MicService.Contact.Api.Data.IContactRepository.UpdateContactInfo(MicService.Abstractions.IntegrationEvents.UserProfileChangedEvent,System.Threading.CancellationToken)">
+        <member name="M:MicService.Contact.Api.Data.IContactRepository.UpdateContactInfo(MicService.Abstractions.IntegrationEvents.UserProfileChangedIntegrationEvent,System.Threading.CancellationToken)">
             <summary>
             更新用户信息
             </summary>

@@ -4,16 +4,31 @@
         <name>MicService.Project.Api</name>
     </assembly>
     <members>
-        <member name="T:MicService.Project.Api.Controllers.TestController">
+        <member name="T:MicService.Project.Api.Controllers.ProjectController">
             <summary>
             测试
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MicService.Project.Api.Controllers.TestController.Test">
+        <member name="M:MicService.Project.Api.Controllers.ProjectController.CreateProjec(MicService.Project.Api.Domain.AggregatesModel.Project)">
             <summary>
-            测试
+            创建项目
             </summary>
+            <param name="project"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Project.Api.Controllers.ProjectController.ViewProjec(System.Int32)">
+            <summary>
+            查看项目
+            </summary>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Project.Api.Controllers.ProjectController.JoinProject(MicService.Project.Api.Domain.AggregatesModel.ProjectContributor)">
+            <summary>
+            加入项目
+            </summary>
+            <param name="contributor"></param>
             <returns></returns>
         </member>
     </members>

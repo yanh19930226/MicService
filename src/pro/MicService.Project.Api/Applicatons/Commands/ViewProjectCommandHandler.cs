@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MicService.Project.Api.Applicatons.Commands
 {
-    public class ViewProjectCommandHandler : IRequestHandler<ViewProjectCommand>
+    public class ViewProjectCommandHandler : AsyncRequestHandler<ViewProjectCommand>
     {
         private IProjectRepository _projectRepository;
         public ViewProjectCommandHandler(IProjectRepository projectRepository)
@@ -16,7 +16,7 @@ namespace MicService.Project.Api.Applicatons.Commands
             _projectRepository = projectRepository;
         }
 
-        public async Task<Unit> Handle(ViewProjectCommand request, CancellationToken cancellationToken)
+        protected override async Task Handle(ViewProjectCommand request, CancellationToken cancellationToken)
         {
             var project = await _projectRepository.GetAsync(request.ProjectId);
             if (project == null)
