@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MicService.Recommend.Api</name>
+    </assembly>
+    <members>
+        <member name="M:MicService.Recommend.Api.Controllers.TestController.Get">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MicService.Recommend.Api.IntergrationEvent.UserProfileChangedIntegrationEvent.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:MicService.Recommend.Api.IntergrationEvent.UserProfileChangedIntegrationEvent.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MicService.Recommend.Api.IntergrationEvent.UserProfileChangedIntegrationEvent.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:MicService.Recommend.Api.IntergrationEvent.UserProfileChangedIntegrationEvent.Title">
+            <summary>
+            工作岗位
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MicService.Recommend.Api.IntergrationEvent.UserProfileChangedIntegrationEvent.Avatar" -->
+    </members>
+</doc>

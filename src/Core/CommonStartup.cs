@@ -31,7 +31,10 @@ namespace Core
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(GloabalExceptionFilter)); 
-            });
+            }).AddNewtonsoftJson(option =>
+                //忽略循环引用
+                option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
             this.CommonServices(services);
 
         }

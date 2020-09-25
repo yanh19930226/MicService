@@ -5,24 +5,23 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\Project\MicService\src\pro\MicService.Project.Api\MicService.Project.Api.xml</DocumentationFile>
+    <DocumentationFile>D:\Work\MicServicebeta\MicServicebeta\src\pro\MicService.Project.Api\MicService.Project.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\MicService.Abstractions\MicService.Abstractions.csproj" />
     <ProjectReference Include="..\MicService.Project.Api.Domain\MicService.Project.Api.Domain.csproj" />
     <ProjectReference Include="..\MicService.Project.Api.Infrastructure\MicService.Project.Api.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Applicatons\DomainEventHandler\" />
-    <Folder Include="Applicatons\IntergrationEvent\" />
-    <Folder Include="Applicatons\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="8.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.0" />
   </ItemGroup>
 

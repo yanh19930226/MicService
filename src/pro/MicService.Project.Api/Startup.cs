@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Core;
+using Core.Cap;
 using Core.Consul;
 using Core.Logger;
 using Core.Swagger;
@@ -16,6 +17,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MicService.Project.Api.Applicatons.Queries;
+using MicService.Project.Api.Applicatons.Services;
+using MicService.Project.Api.Domain.AggregatesModel;
 using MicService.Project.Api.Infrastructure;
 
 namespace MicService.Project.Api
@@ -28,6 +32,18 @@ namespace MicService.Project.Api
 
         public override void CommonServices(IServiceCollection services)
         {
+            #region ½Ó¿Ú
+            services.AddScoped<IRecommendService, TestRecommendService>()
+                   .AddScoped<IProjectQueries, ProjectQueries>(sp =>
+                   {
+                       return new ProjectQueries(Configuration.GetConnectionString("MysqlUser"));
+                   })
+                    .AddScoped<IProjectRepository, ProjectRepository>(sp =>
+                    {
+                        var projectContext = sp.GetRequiredService<ProjectContext>();
+                        return new ProjectRepository(projectContext);
+                    });
+            #endregion
 
             #region MediatR
             services.AddMediatR(typeof(Startup));
@@ -43,6 +59,7 @@ namespace MicService.Project.Api
 
             services.AddCoreSwagger()
                     .AddConsul()
+                     .AddCap()
                     .AddCoreSeriLog();
         }
 

@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace MicService.Project.Api.Applicatons.Queries
 {
-    public class IProjectQueries
+    public interface IProjectQueries
     {
+        Task<dynamic> GetProjectDetail(int projectId);
+        Task<dynamic> GetProjectsByUserId(int userId);
     }
 }
