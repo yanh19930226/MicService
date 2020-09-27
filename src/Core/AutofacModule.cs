@@ -22,7 +22,11 @@ namespace Core
                     cfg.AddProfile(item);
                 }
             }));
-            builder.Register(ctx => ctx.Resolve<MapperConfiguration>().CreateMapper()).As<IMapper>().InstancePerLifetimeScope(); 
+            builder.Register(ctx => ctx.Resolve<MapperConfiguration>().CreateMapper()).As<IMapper>().InstancePerLifetimeScope();
+            #endregion
+
+            #region IHttpClientFactory
+
             #endregion
         }
     }

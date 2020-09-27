@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,9 +20,9 @@ namespace Core.Http
             return new StandardHttpClient();
         }
 
-        public IHttpClient GetHttpClientWithPolly()
+        public IHttpClient GetHttpClientWithPolly(string applicationName, Func<string, IEnumerable<Policy>> pollices)
         {
-            return new PollyHttpClient("", Policy[], _logger, _httpContextAccessor);
+            return new PollyHttpClient(applicationName, pollices, _httpContextAccessor);
         }
        
         //private Policy[] CreatePolicy(string origin)
