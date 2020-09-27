@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using zipkin4net.Transport.Http;
 
 namespace Core.Http
 {
@@ -20,18 +21,18 @@ namespace Core.Http
     /// breaker policies when invoking HTTP services. 
     /// Based on Polly library: https://github.com/App-vNext/Polly
     /// </summary>
-    public class CoreHttpClient : IHttpClient
+    public class PollyHttpClient : IHttpClient
     {
         private readonly HttpClient _client;
-        private readonly ILogger<CoreHttpClient> _logger;
+        //private readonly ILogger<PollyHttpClient> _logger;
         private readonly Func<string, IEnumerable<Policy>> _policyCreator;
         private ConcurrentDictionary<string, PolicyWrap> _policyWrappers;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CoreHttpClient(string applicationName, Func<string, IEnumerable<Policy>> policyCreator, ILogger<CoreHttpClient> logger, IHttpContextAccessor httpContextAccessor)
+        public PollyHttpClient(string applicationName, Func<string, IEnumerable<Policy>> policyCreator, IHttpContextAccessor httpContextAccessor)
         {
             _client = new HttpClient(new TracingHandler(applicationName));
-            _logger = logger;
+            //_logger = logger;
             _policyCreator = policyCreator;
             _policyWrappers = new ConcurrentDictionary<string, PolicyWrap>();
             _httpContextAccessor = httpContextAccessor;

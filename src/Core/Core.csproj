@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Http\CoreHttpClient.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="index.html" />
   </ItemGroup>
 
