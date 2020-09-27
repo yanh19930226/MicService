@@ -3,8 +3,10 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Consul;
 using Core.Extensions;
+using Core.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,6 +38,13 @@ namespace Core
                 //忽略循环引用
                 option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
+
+            //services.AddSingleton(typeof(HttpClientFactory), sp =>
+            //{
+            //    var httpContextAccessor = sp.GetRequiredService<IHttpContextAccessor>();
+            //    return new HttpClientFactory(httpContextAccessor);
+            //});
+
             this.CommonServices(services);
 
         }

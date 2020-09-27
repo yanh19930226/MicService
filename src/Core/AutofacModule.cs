@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
+using Core.Http;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,8 @@ namespace Core
             #endregion
 
             #region IHttpClientFactory
-
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
+            builder.RegisterType<HttpClientFactory>().As<IHttpClientFactory>().InstancePerLifetimeScope();
             #endregion
         }
     }

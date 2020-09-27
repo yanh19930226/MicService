@@ -25,11 +25,11 @@ namespace Core.Http
     {
         private readonly HttpClient _client;
         //private readonly ILogger<PollyHttpClient> _logger;
-        private readonly Func<string, IEnumerable<Policy>> _policyCreator;
+        private readonly Func<string, ISyncPolicy> _policyCreator;
         private ConcurrentDictionary<string, PolicyWrap> _policyWrappers;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PollyHttpClient(string applicationName, Func<string, IEnumerable<Policy>> policyCreator, IHttpContextAccessor httpContextAccessor)
+        public PollyHttpClient(string applicationName, Func<string, ISyncPolicy> policyCreator, IHttpContextAccessor httpContextAccessor)
         {
             _client = new HttpClient(new TracingHandler(applicationName));
             //_logger = logger;
@@ -145,12 +145,12 @@ namespace Core.Http
             if (!_policyWrappers.TryGetValue(normalizedOrigin, out PolicyWrap policyWrap))
             {
                 //policyWrap = Policy.WrapAsync(_policyCreator()
-                policyWrap = Policy.WrapAsync(_policyCreator(normalizedOrigin).ToArray());
+                policyWrap = Policy.Wrap(_policyCreator(normalizedOrigin));
                 _policyWrappers.TryAdd(normalizedOrigin, policyWrap);
             }
             // Executes the action applying all 
             // the policies defined in the wrapper
-            return await policyWrap.ExecuteAsync(action, new Context(normalizedOrigin));
+            return await policyWrap.Execute(action, new Context(normalizedOrigin));
         }
 
         private static string NormalizeOrigin(string origin)
