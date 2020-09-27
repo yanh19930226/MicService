@@ -124,15 +124,15 @@ namespace Core.Http
                 // raise exception if HttpResponseCode 500 
                 // needed for circuit breaker to track fails
 #warning Http请求正常返回HttpStatusCode.OK
-                //if (response.StatusCode == HttpStatusCode.InternalServerError)
-                //{
-                //    throw new HttpRequestException();
-                //}
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    throw new HttpRequestException();
+                }
 #warning 设置HttpRequestException测试Polly故障处理
-                //if (response.StatusCode == HttpStatusCode.OK)
-                //{
-                //    throw new HttpRequestException();
-                //}
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    throw new HttpRequestException();
+                }
                 return response;
             });
         }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace Core.Http
@@ -24,35 +25,37 @@ namespace Core.Http
         {
             return new PollyHttpClient(applicationName, pollices, _httpContextAccessor);
         }
-       
-        //private Policy[] CreatePolicy(string origin)
-        //{
-        //    return new Policy[] {
-        //        Policy.Handle<HttpRequestException>()
-        //        .WaitAndRetryAsync(
-        //            _retryCount,
-        //            retryAttempt=>TimeSpan.FromSeconds(Math.Pow(2,retryAttempt)),
-        //            (exception,timespan,retrycount,context)=>{
-        //                var msg=$"第{retrycount}次"+
-        //                $"of {context.PolicyKey}"+
-        //                $"at {context.OperationKey},"+
-        //                $"due to:{exception}";
-        //                //_logger.LogWarning(msg);
-        //                _logger.LogDebug(msg);
-        //            }),
-        //        Policy.Handle<HttpRequestException>()
-        //        .CircuitBreakerAsync(
-        //            _exceptionsAllowedBeforeBreaking,
-        //            TimeSpan.FromMinutes(1),
-        //            (exception,duraton)=>{
-        //                _logger.LogDebug("熔断器打开");
-        //                //_logger.LogTrace("熔断器打开");
-        //            },()=>{
-        //                _logger.LogDebug("熔断器关闭");
-        //                //_logger.LogTrace("熔断器关闭");
-        //            })
-        //        //扩展机制:仓壁隔离;回退 todo
-        //    };
-        //}
+
+
+        
+        private Policy[] CreatePolicy(string origin)
+        {
+            return new Policy[] {
+                Policy.Handle<HttpRequestException>()
+                .WaitAndRetryAsync(
+                    _retryCount,
+                    retryAttempt=>TimeSpan.FromSeconds(Math.Pow(2,retryAttempt)),
+                    (exception,timespan,retrycount,context)=>{
+                        var msg=$"第{retrycount}次"+
+                        $"of {context.PolicyKey}"+
+                        $"at {context.OperationKey},"+
+                        $"due to:{exception}";
+                        //_logger.LogWarning(msg);
+                        _logger.LogDebug(msg);
+                    }),
+                Policy.Handle<HttpRequestException>()
+                .CircuitBreakerAsync(
+                    _exceptionsAllowedBeforeBreaking,
+                    TimeSpan.FromMinutes(1),
+                    (exception,duraton)=>{
+                        _logger.LogDebug("熔断器打开");
+                        //_logger.LogTrace("熔断器打开");
+                    },()=>{
+                        _logger.LogDebug("熔断器关闭");
+                        //_logger.LogTrace("熔断器关闭");
+                    })
+                //扩展机制:仓壁隔离;回退 todo
+            };
+        }
     }
 }
