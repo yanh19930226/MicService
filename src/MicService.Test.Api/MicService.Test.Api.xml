@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MicService.Test.Api</name>
+    </assembly>
+    <members>
+        <member name="T:MicService.Test.Api.Controllers.BlogController">
+            <summary>
+            Blog
+            </summary>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.Test">
+            <summary>
+            Test
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.Name">
+            <summary>
+            获取名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MicService.Test.Api.Controllers.PostController">
+            <summary>
+            Post
+            </summary>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.PostController.Test">
+            <summary>
+            Test
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.TestDto.Mobile" -->
+        <member name="P:MicService.Test.Api.Dto.TestDto.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -21,162 +21,162 @@ namespace Core.Http
     /// breaker policies when invoking HTTP services. 
     /// Based on Polly library: https://github.com/App-vNext/Polly
     /// </summary>
-    public class PollyHttpClient : IHttpClient
-    {
-        private readonly HttpClient _client;
-        //private readonly ILogger<PollyHttpClient> _logger;
-        private readonly Func<string, ISyncPolicy> _policyCreator;
-        private ConcurrentDictionary<string, PolicyWrap> _policyWrappers;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+//    public class PollyHttpClient : IHttpClient
+//    {
+//        private readonly HttpClient _client;
+//        //private readonly ILogger<PollyHttpClient> _logger;
+//        private readonly Func<string, ISyncPolicy> _policyCreator;
+//        private ConcurrentDictionary<string, PolicyWrap> _policyWrappers;
+//        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PollyHttpClient(string applicationName, Func<string, ISyncPolicy> policyCreator, IHttpContextAccessor httpContextAccessor)
-        {
-            _client = new HttpClient(new TracingHandler(applicationName));
-            //_logger = logger;
-            _policyCreator = policyCreator;
-            _policyWrappers = new ConcurrentDictionary<string, PolicyWrap>();
-            _httpContextAccessor = httpContextAccessor;
-        }
-        private HttpRequestMessage CreateHttpRequestMessage<T>(HttpMethod method, string uri, T item)
-        {
-            return new HttpRequestMessage(method, uri) { Content = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json") };
-        }
-        private HttpRequestMessage CreateHttpRequestMessage(HttpMethod method, string uri, Dictionary<string, string> form)
-        {
-            return new HttpRequestMessage(method, uri) { Content = new FormUrlEncodedContent(form) };
-        }
-        public Task<string> GetStringAsync(string uri, string authorizationToken = null, string authorizationMethod = "Bearer")
-        {
-            var origin = GetOriginFromUri(uri);
+//        public PollyHttpClient(string applicationName, Func<string, ISyncPolicy> policyCreator, IHttpContextAccessor httpContextAccessor)
+//        {
+//            _client = new HttpClient(new TracingHandler(applicationName));
+//            //_logger = logger;
+//            _policyCreator = policyCreator;
+//            _policyWrappers = new ConcurrentDictionary<string, PolicyWrap>();
+//            _httpContextAccessor = httpContextAccessor;
+//        }
+//        private HttpRequestMessage CreateHttpRequestMessage<T>(HttpMethod method, string uri, T item)
+//        {
+//            return new HttpRequestMessage(method, uri) { Content = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json") };
+//        }
+//        private HttpRequestMessage CreateHttpRequestMessage(HttpMethod method, string uri, Dictionary<string, string> form)
+//        {
+//            return new HttpRequestMessage(method, uri) { Content = new FormUrlEncodedContent(form) };
+//        }
+//        public Task<string> GetStringAsync(string uri, string authorizationToken = null, string authorizationMethod = "Bearer")
+//        {
+//            var origin = GetOriginFromUri(uri);
 
-            return HttpInvoker(origin, async () =>
-            {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+//            return HttpInvoker(origin, async () =>
+//            {
+//                var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
 
-                SetAuthorizationHeader(requestMessage);
+//                SetAuthorizationHeader(requestMessage);
 
-                if (authorizationToken != null)
-                {
-                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(authorizationMethod, authorizationToken);
-                }
+//                if (authorizationToken != null)
+//                {
+//                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(authorizationMethod, authorizationToken);
+//                }
 
-                var response = await _client.SendAsync(requestMessage);
+//                var response = await _client.SendAsync(requestMessage);
 
-                // raise exception if HttpResponseCode 500 
-                // needed for circuit breaker to track fails
+//                // raise exception if HttpResponseCode 500 
+//                // needed for circuit breaker to track fails
 
-                if (response.StatusCode == HttpStatusCode.InternalServerError)
-                {
-                    throw new HttpRequestException();
-                }
+//                if (response.StatusCode == HttpStatusCode.InternalServerError)
+//                {
+//                    throw new HttpRequestException();
+//                }
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    return null;
-                }
+//                if (!response.IsSuccessStatusCode)
+//                {
+//                    return null;
+//                }
 
-                return await response.Content.ReadAsStringAsync();
-            });
-        }
-        public Task<HttpResponseMessage> PutAsync<T>(string uri, T item, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
-        {
-            Func<HttpRequestMessage> func = () => CreateHttpRequestMessage(HttpMethod.Post, uri, item);
-            return DoPostPutAsync(HttpMethod.Put, uri, func, authorizationToken, requestId, authorizationMethod);
-        }
-        public Task<HttpResponseMessage> PostAsync<T>(string uri, T item, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
-        {
-            Func<HttpRequestMessage> func = () => CreateHttpRequestMessage(HttpMethod.Post, uri, item);
-            return DoPostPutAsync(HttpMethod.Post, uri, func, authorizationToken, requestId, authorizationMethod);
-        }
-        public Task<HttpResponseMessage> PostAsync(string uri, Dictionary<string, string> form, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
-        {
-            Func<HttpRequestMessage> func = () => CreateHttpRequestMessage(HttpMethod.Post, uri, form);
-            return DoPostPutAsync(HttpMethod.Post, uri, func, authorizationToken, requestId, authorizationMethod);
-        }
-        private Task<HttpResponseMessage> DoPostPutAsync(HttpMethod method, string uri, Func<HttpRequestMessage> requestMessageAction, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
-        {
-            if (method != HttpMethod.Post && method != HttpMethod.Put)
-            {
-                throw new ArgumentException("Value must be either post or put.", nameof(method));
-            }
+//                return await response.Content.ReadAsStringAsync();
+//            });
+//        }
+//        public Task<HttpResponseMessage> PutAsync<T>(string uri, T item, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
+//        {
+//            Func<HttpRequestMessage> func = () => CreateHttpRequestMessage(HttpMethod.Post, uri, item);
+//            return DoPostPutAsync(HttpMethod.Put, uri, func, authorizationToken, requestId, authorizationMethod);
+//        }
+//        public Task<HttpResponseMessage> PostAsync<T>(string uri, T item, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
+//        {
+//            Func<HttpRequestMessage> func = () => CreateHttpRequestMessage(HttpMethod.Post, uri, item);
+//            return DoPostPutAsync(HttpMethod.Post, uri, func, authorizationToken, requestId, authorizationMethod);
+//        }
+//        public Task<HttpResponseMessage> PostAsync(string uri, Dictionary<string, string> form, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
+//        {
+//            Func<HttpRequestMessage> func = () => CreateHttpRequestMessage(HttpMethod.Post, uri, form);
+//            return DoPostPutAsync(HttpMethod.Post, uri, func, authorizationToken, requestId, authorizationMethod);
+//        }
+//        private Task<HttpResponseMessage> DoPostPutAsync(HttpMethod method, string uri, Func<HttpRequestMessage> requestMessageAction, string authorizationToken = null, string requestId = null, string authorizationMethod = "Bearer")
+//        {
+//            if (method != HttpMethod.Post && method != HttpMethod.Put)
+//            {
+//                throw new ArgumentException("Value must be either post or put.", nameof(method));
+//            }
 
-            // a new StringContent must be created for each retry 
-            // as it is disposed after each call
-            var origin = GetOriginFromUri(uri);
+//            // a new StringContent must be created for each retry 
+//            // as it is disposed after each call
+//            var origin = GetOriginFromUri(uri);
 
-            return HttpInvoker(origin, async () =>
-            {
-                var requestMessage = requestMessageAction();
-                SetAuthorizationHeader(requestMessage);
+//            return HttpInvoker(origin, async () =>
+//            {
+//                var requestMessage = requestMessageAction();
+//                SetAuthorizationHeader(requestMessage);
 
-                if (authorizationToken != null)
-                {
-                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(authorizationMethod, authorizationToken);
-                }
+//                if (authorizationToken != null)
+//                {
+//                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(authorizationMethod, authorizationToken);
+//                }
 
-                if (requestId != null)
-                {
-                    requestMessage.Headers.Add("x-requestid", requestId);
-                }
+//                if (requestId != null)
+//                {
+//                    requestMessage.Headers.Add("x-requestid", requestId);
+//                }
 
-                var response = await _client.SendAsync(requestMessage);
+//                var response = await _client.SendAsync(requestMessage);
 
-                // raise exception if HttpResponseCode 500 
-                // needed for circuit breaker to track fails
-#warning Http请求正常返回HttpStatusCode.OK
-                if (response.StatusCode == HttpStatusCode.InternalServerError)
-                {
-                    throw new HttpRequestException();
-                }
-#warning 设置HttpRequestException测试Polly故障处理
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    throw new HttpRequestException();
-                }
-                return response;
-            });
-        }
+//                // raise exception if HttpResponseCode 500 
+//                // needed for circuit breaker to track fails
+//#warning Http请求正常返回HttpStatusCode.OK
+//                if (response.StatusCode == HttpStatusCode.InternalServerError)
+//                {
+//                    throw new HttpRequestException();
+//                }
+//#warning 设置HttpRequestException测试Polly故障处理
+//                if (response.StatusCode == HttpStatusCode.OK)
+//                {
+//                    throw new HttpRequestException();
+//                }
+//                return response;
+//            });
+//        }
 
-        #region private Util Methods
-        private async Task<T> HttpInvoker<T>(string origin, Func<Task<T>> action)
-        {
-            var normalizedOrigin = NormalizeOrigin(origin);
-            //如果请求的origin地址的缓存Wrpper中没有规则,先添加规则
-            if (!_policyWrappers.TryGetValue(normalizedOrigin, out PolicyWrap policyWrap))
-            {
-                //policyWrap = Policy.WrapAsync(_policyCreator()
-                policyWrap = Policy.Wrap(_policyCreator(normalizedOrigin));
-                _policyWrappers.TryAdd(normalizedOrigin, policyWrap);
-            }
-            // Executes the action applying all 
-            // the policies defined in the wrapper
-            return await policyWrap.Execute(action, new Context(normalizedOrigin));
-        }
+//        #region private Util Methods
+//        private async Task<T> HttpInvoker<T>(string origin, Func<Task<T>> action)
+//        {
+//            var normalizedOrigin = NormalizeOrigin(origin);
+//            //如果请求的origin地址的缓存Wrpper中没有规则,先添加规则
+//            if (!_policyWrappers.TryGetValue(normalizedOrigin, out PolicyWrap policyWrap))
+//            {
+//                //policyWrap = Policy.WrapAsync(_policyCreator()
+//                policyWrap = Policy.Wrap(_policyCreator(normalizedOrigin));
+//                _policyWrappers.TryAdd(normalizedOrigin, policyWrap);
+//            }
+//            // Executes the action applying all 
+//            // the policies defined in the wrapper
+//            return await policyWrap.Execute(action, new Context(normalizedOrigin));
+//        }
 
-        private static string NormalizeOrigin(string origin)
-        {
-            return origin?.Trim()?.ToLower();
-        }
+//        private static string NormalizeOrigin(string origin)
+//        {
+//            return origin?.Trim()?.ToLower();
+//        }
 
-        private static string GetOriginFromUri(string uri)
-        {
-            var url = new Uri(uri);
+//        private static string GetOriginFromUri(string uri)
+//        {
+//            var url = new Uri(uri);
 
-            var origin = $"{url.Scheme}://{url.DnsSafeHost}:{url.Port}";
+//            var origin = $"{url.Scheme}://{url.DnsSafeHost}:{url.Port}";
 
-            return origin;
-        }
+//            return origin;
+//        }
 
-        private void SetAuthorizationHeader(HttpRequestMessage requestMessage)
-        {
-            var authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-            if (!string.IsNullOrEmpty(authorizationHeader))
-            {
-                requestMessage.Headers.Add("Authorization", new List<string>() { authorizationHeader });
-            }
-        }
+//        private void SetAuthorizationHeader(HttpRequestMessage requestMessage)
+//        {
+//            var authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+//            if (!string.IsNullOrEmpty(authorizationHeader))
+//            {
+//                requestMessage.Headers.Add("Authorization", new List<string>() { authorizationHeader });
+//            }
+//        }
 
 
-        #endregion
-    }
+//        #endregion
+//    }
 }
