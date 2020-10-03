@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Data.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Data.SeedWork
+namespace Core.Data.Infra
 {
 	public class Repository<TEntity> : IRepository<TEntity>, IDisposable where TEntity : class
 	{
@@ -14,21 +15,20 @@ namespace Core.Data.SeedWork
 
 		protected readonly DbSet<TEntity> _dbSet;
 
-		public IUnitOfWork UnitOfWork => _context;
-
 		public Repository(ZeusContext context)
 		{
 			_context = context;
 			_dbSet = _context.Set<TEntity>();
 		}
 
-		public virtual TEntity Add(TEntity obj)
+		public virtual void Add(TEntity obj)
 		{
-			return _dbSet.Add(obj).Entity;
+			_dbSet.Add(obj);
 		}
-		public async Task<TEntity> GetAsync(int id)
+
+		public virtual ValueTask<TEntity> GetByIdAsync(object id)
 		{
-			return await _dbSet.FindAsync(id);
+			return _dbSet.FindAsync(id);
 		}
 
 		public virtual IQueryable<TEntity> GetAll()
@@ -36,9 +36,9 @@ namespace Core.Data.SeedWork
 			return _dbSet;
 		}
 
-		public virtual TEntity Update(TEntity obj)
+		public virtual void Update(TEntity obj)
 		{
-			return _dbSet.Update(obj).Entity;
+			_dbSet.Update(obj);
 		}
 
 		public virtual void Remove(object id)
@@ -46,7 +46,7 @@ namespace Core.Data.SeedWork
 			_dbSet.Remove(_dbSet.Find(id));
 		}
 
-		public virtual IQueryable<TEntity> GetByPage<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TKey>> orderByLambda, bool isAsc, out int total)
+		public virtual IQueryable<TEntity> GetByPage<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TKey>> orderByLambda, out int total, bool isAsc = true)
 		{
 			var tempData = _dbSet.Where(whereLambda);
 			total = tempData.Count();
@@ -71,7 +71,5 @@ namespace Core.Data.SeedWork
 			_context.Dispose();
 			GC.SuppressFinalize(this);
 		}
-
-		
 	}
 }

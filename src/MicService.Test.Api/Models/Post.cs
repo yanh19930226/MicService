@@ -1,4 +1,4 @@
-﻿using Core.Data.SeedWork;
+﻿using Core.Data.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +10,7 @@ namespace MicService.Test.Api.Models
     {
         public string Title { get; set; }
         public string Content { get; set; }
+        public long BlogId { get; set; }
+        public virtual Blog Blog { get; set; }
     }
 }

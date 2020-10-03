@@ -1,5 +1,4 @@
-﻿using Core.Data.SeedWork;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MicService.Test.Api.Models;
 using System;

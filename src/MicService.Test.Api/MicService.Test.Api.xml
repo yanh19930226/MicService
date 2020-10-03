@@ -4,10 +4,58 @@
         <name>MicService.Test.Api</name>
     </assembly>
     <members>
+        <member name="T:MicService.Test.Api.Application.CommandHandlers.Blogs.BlogUpdateCommandHandler">
+            <summary>
+            BlogUpdateCommandHandler
+            </summary>
+        </member>
+        <member name="M:MicService.Test.Api.Application.Queries.BlogQueries.GetAll">
+            <summary>
+            列表数据不分页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Test.Api.Application.Queries.BlogQueries.GetPage(MicService.Test.Api.Dto.PostPageRequestDTO)">
+            <summary>
+            列表数据分页
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
         <member name="T:MicService.Test.Api.Controllers.BlogController">
             <summary>
             Blog
             </summary>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.GetBlogList">
+            <summary>
+            获取博客
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.GetBlogPageList(MicService.Test.Api.Dto.PostPageRequestDTO)">
+            <summary>
+            分页获取博客
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.Add(MicService.Test.Api.Dto.Blogs.BlogAddDto)">
+            <summary>
+            添加博客
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.Update(MicService.Test.Api.Dto.Blogs.BlogUpdateDto)">
+            <summary>
+            修改博客
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MicService.Test.Api.Controllers.BlogController.Delete(System.Int64)">
+            <summary>
+            删除博客
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:MicService.Test.Api.Controllers.BlogController.Test">
             <summary>
@@ -15,10 +63,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MicService.Test.Api.Controllers.BlogController.Name">
+        <member name="M:MicService.Test.Api.Controllers.BlogController.ValidateTest(MicService.Test.Api.Dto.TestDto)">
             <summary>
-            获取名称
+            ValidateTest
             </summary>
+            <param name="dto"></param>
             <returns></returns>
         </member>
         <member name="T:MicService.Test.Api.Controllers.PostController">
@@ -31,6 +80,21 @@
             Test
             </summary>
             <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.Blogs.BlogAddDto.Name" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.Blogs.BlogAddDto.Url" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.Blogs.BlogUpdateDto.Id" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.Blogs.BlogUpdateDto.Name" -->
+        <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.Blogs.BlogUpdateDto.Url" -->
+        <member name="P:MicService.Test.Api.Dto.PostPageRequestDTO.PageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:MicService.Test.Api.Dto.PostPageRequestDTO.PageSize">
+            <summary>
+            每页数量
+            </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:MicService.Test.Api.Dto.TestDto.Mobile" -->
         <member name="P:MicService.Test.Api.Dto.TestDto.Code">

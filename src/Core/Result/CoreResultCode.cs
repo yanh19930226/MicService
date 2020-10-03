@@ -9,10 +9,10 @@ namespace Core.Result
         /// <summary>
         /// 成功
         /// </summary>
-        Succeed,
+        Succeed=1,
         /// <summary>
         /// 失败
         /// </summary>
-        Failed 
+        Failed=0
     }
 }

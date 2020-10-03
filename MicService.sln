@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Project.Api.Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Recommend.Api", "src\MicService.Recommend.Api\MicService.Recommend.Api.csproj", "{670208FF-27B1-48FC-8DA4-1016A706E41D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicService.Test.Api", "src\MicService.Test.Api\MicService.Test.Api.csproj", "{1392CA80-BC0D-414C-A18E-01C9A040D174}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Test.Api", "src\MicService.Test.Api\MicService.Test.Api.csproj", "{1392CA80-BC0D-414C-A18E-01C9A040D174}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

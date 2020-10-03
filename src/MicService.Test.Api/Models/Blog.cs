@@ -1,4 +1,4 @@
-﻿using Core.Data.SeedWork;
+﻿using Core.Data.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +10,6 @@ namespace MicService.Test.Api.Models
     {
         public string Name { get; set; }
         public string Url { get; set; }
+        public virtual List<Post> Posts { get; set; }
     }
 }

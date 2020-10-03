@@ -2,7 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Consul;
-using Core.Data.SeedWork;
 using Core.Extensions;
 using Core.Http;
 using Core.Result;
@@ -69,7 +68,7 @@ namespace Core
         #region Autofac
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterModule(new AutofacModule());
+            builder.RegisterModule(new AutofacModule(Configuration));
         } 
         #endregion
 
