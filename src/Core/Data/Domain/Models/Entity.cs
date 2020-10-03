@@ -23,13 +23,13 @@ namespace Core.Data.Domain.Models
 		{
 			get;
 			set;
-		} = DateTime.Now;
+		} 
 
 		public DateTime ModifyTime
 		{
 			get;
 			set;
-		} = DateTime.Now;
+		} 
 
 		public bool IsDel
 		{

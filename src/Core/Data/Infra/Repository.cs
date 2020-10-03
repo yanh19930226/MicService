@@ -1,4 +1,5 @@
 ﻿using Core.Data.Domain.Interfaces;
+using Core.Data.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Infra
 {
-	public class Repository<TEntity> : IRepository<TEntity>, IDisposable where TEntity : class
+	public class Repository<TEntity> : IRepository<TEntity>, IDisposable where TEntity : Entity
 	{
 		protected readonly ZeusContext _context;
 
@@ -23,6 +24,8 @@ namespace Core.Data.Infra
 
 		public virtual void Add(TEntity obj)
 		{
+			obj.CreateTime = DateTime.Now;
+			obj.ModifyTime = DateTime.Now;
 			_dbSet.Add(obj);
 		}
 
@@ -38,6 +41,7 @@ namespace Core.Data.Infra
 
 		public virtual void Update(TEntity obj)
 		{
+			obj.ModifyTime = DateTime.Now;
 			_dbSet.Update(obj);
 		}
 

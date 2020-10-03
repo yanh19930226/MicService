@@ -49,7 +49,6 @@ namespace MicService.Test.Api.Controllers
         [HttpPost]
         public PageResult<IQueryable<Blog>> GetBlogPageList([FromBody]PostPageRequestDTO dto)
         {
-            PageResult<IQueryable<Blog>> obj = new PageResult<IQueryable<Blog>>();
             return _q.GetPage(dto);
         }
         /// <summary>
