@@ -3,6 +3,8 @@ using Core.Data.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -49,7 +51,7 @@ namespace Core.Data.Infra
 		{
 			_dbSet.Remove(_dbSet.Find(id));
 		}
-
+		
 		public virtual IQueryable<TEntity> GetByPage<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, TKey>> orderByLambda, out int total, bool isAsc = true)
 		{
 			var tempData = _dbSet.Where(whereLambda);
@@ -75,5 +77,41 @@ namespace Core.Data.Infra
 			_context.Dispose();
 			GC.SuppressFinalize(this);
 		}
+
+		#region SQL语句
+		public virtual void BulkInsert<T>(List<T> entities)
+		{ }
+		public int ExecuteSql(string sql)
+		{
+			return _context.Database.ExecuteSqlCommand(sql);
+		}
+
+		public Task<int> ExecuteSqlAsync(string sql)
+		{
+			return _context.Database.ExecuteSqlCommandAsync(sql);
+		}
+
+		public int ExecuteSql(string sql, List<DbParameter> spList)
+		{
+			return _context.Database.ExecuteSqlCommand(sql, spList.ToArray());
+		}
+
+		public async Task<int> ExecuteSqlAsync(string sql, List<DbParameter> spList)
+		{
+			return await _context.Database.ExecuteSqlCommandAsync(sql, spList.ToArray());
+		}
+
+
+		public virtual DataTable GetDataTableWithSql(string sql)
+		{
+			throw new NotImplementedException();
+		}
+
+		public virtual DataTable GetDataTableWithSql(string sql, List<DbParameter> spList)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
 	}
 }
