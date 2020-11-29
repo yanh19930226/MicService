@@ -8,7 +8,7 @@ namespace Core.Redis
 {
     public static class RedisServiceExtensions
     {
-        public static IServiceCollection AddCoreSwagger(this IServiceCollection services, IConfiguration configuration = null)
+        public static IServiceCollection AddRedis(this IServiceCollection services, IConfiguration configuration = null)
         {
             configuration = (configuration ?? services.BuildServiceProvider().GetService<IConfiguration>());
             RedisOptions redisOption = configuration.GetSection("Redis").Get<RedisOptions>();
