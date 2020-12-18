@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Recommend.Api", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicService.Test.Api", "src\MicService.Test.Api\MicService.Test.Api.csproj", "{1392CA80-BC0D-414C-A18E-01C9A040D174}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "src\Test\Test.csproj", "{52C6E050-16B8-4E82-9975-30A136DCDA01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{1392CA80-BC0D-414C-A18E-01C9A040D174}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1392CA80-BC0D-414C-A18E-01C9A040D174}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1392CA80-BC0D-414C-A18E-01C9A040D174}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52C6E050-16B8-4E82-9975-30A136DCDA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C6E050-16B8-4E82-9975-30A136DCDA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52C6E050-16B8-4E82-9975-30A136DCDA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52C6E050-16B8-4E82-9975-30A136DCDA01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{5D57B7ED-43B5-4EE0-ADE2-2593F8E91CDD} = {C343BC49-84ED-4D4E-A9DD-ED8E86719F52}
 		{670208FF-27B1-48FC-8DA4-1016A706E41D} = {E6DFB195-8DD5-4540-8AF6-83EF0D922A45}
 		{1392CA80-BC0D-414C-A18E-01C9A040D174} = {E6DFB195-8DD5-4540-8AF6-83EF0D922A45}
+		{52C6E050-16B8-4E82-9975-30A136DCDA01} = {E6DFB195-8DD5-4540-8AF6-83EF0D922A45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CCEAC701-E624-491D-BFD7-5B579BA480AE}
