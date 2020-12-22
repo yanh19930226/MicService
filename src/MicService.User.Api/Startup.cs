@@ -44,7 +44,7 @@ namespace MicService.User.Api
             })
                .AddCoreSwagger()
                .AddConsul()
-               .AddEventBus()
+               //.AddEventBus()
                .AddCap()
                .AddCoreSeriLog();
 
@@ -54,12 +54,12 @@ namespace MicService.User.Api
         public override void CommonConfigure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             ServiceLocator.ApplicationBuilder = app;
-            app.UseCoreSwagger()
-                  .UseEventBus(eventBus =>
-                  {
-                      eventBus.Subscribe<TestIntegrationEvent, TestIntegrationEventHandler>();
-                  })
-                  .UseConsul();
+            app.UseCoreSwagger();
+                  //.UseEventBus(eventBus =>
+                  //{
+                  //    eventBus.Subscribe<TestIntegrationEvent, TestIntegrationEventHandler>();
+                  //})
+                  //.UseConsul();
         }
     }
 }

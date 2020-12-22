@@ -115,7 +115,32 @@ namespace MicService.User.Api.Controllers
         /// <summary>
         /// 检查或则创建用户
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// ```
+        ///  POST /hotmap
+        ///  {
+        ///      "displayName": "演示名称1",
+        ///      "matchRule": 0,
+        ///      "matchCondition": "https://www.cnblogs.com/JulianHuang/",
+        ///      "targetUrl": "https://www.cnblogs.com/JulianHuang/",
+        ///      "versions": [
+        ///      {
+        ///         "versionName": "ver2020",
+        ///         "startDate": "2020-12-13T10:03:09",
+        ///         "endDate": "2020-12-13T10:03:09",
+        ///          "offlinePageUrl": "3fa85f64-5717-4562-b3fc-2c963f66afa6",  //  没有绑定图片和离线网页的对应属性传 null
+        ///          "pictureUrl": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        ///          "createDate": "2020-12-13T10:03:09"
+        ///      }
+        ///    ]
+        ///  }
+        ///```
+        /// </remarks>
         /// <returns></returns>
+        [Consumes("application/json")]
+        [Produces("text/plan")]
+        [ProducesResponseType(typeof(Models.Domain.User), 200)]
         [Route("checkcreate")]
         [HttpPost]
         public async Task<IActionResult> CheckOrCreate([FromForm]string phone)
